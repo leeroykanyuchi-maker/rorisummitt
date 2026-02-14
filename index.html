@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rorisummit</title>
+    
+    <!-- MailerLite Universal -->
+    <script>
+        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+        ml('account', '2068975');
+    </script>
+    <!-- End MailerLite Universal -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s;
+            transform: translate(-50%, -50%);
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff88;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff88;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(0, 255, 136, 0.03) 50%, transparent 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 136, 0.03) 2px, rgba(0, 255, 136, 0.03) 4px);
+            animation: scan 8s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.8)); }
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: #00ff88;
+            text-decoration: none;
+            border: 2px solid #00ff88;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #00ff88;
+            transition: left 0.3s;
+            z-index: -1;
+        }
+        
+        .cta:hover::before {
+            left: 0;
+        }
+        
+        .cta:hover {
+            color: #0a0a0a;
+        }
+        
+        .section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: #00ff88;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: #00ff88;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+        
+        .project-card {
+            background: #151515;
+            border: 1px solid #252525;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .project-card:hover::before {
+            left: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+        
+        .project-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .project-card p {
+            color: #888;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-link {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            padding-left: 10px;
+        }
+        
+        .testimonials {
+            background: #0f0f0f;
+        }
+        
+        .testimonial-card {
+            background: #151515;
+            padding: 3rem;
+            border-left: 4px solid #00ff88;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-text {
+            font-size: 1.3rem;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            color: #00ff88;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .testimonial-role {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .skills {
+            background: #0a0a0a;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .skill-item {
+            padding: 0.8rem;
+            background: #151515;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #00ff88;
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            background: #1a1a1a;
+            transform: translateX(10px);
+        }
+        
+        .pricing {
+            background: #0f0f0f;
+            text-align: center;
+        }
+        
+        .pricing-info {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #151515;
+            padding: 3rem;
+            border: 1px solid #252525;
+        }
+        
+        .pricing-info h3 {
+            color: #00ff88;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-info p {
+            color: #888;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .contact {
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f1f0f 100%);
+        }
+        
+        .contact p {
+            font-size: 1.3rem;
+            color: #888;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+        
+        .contact-item {
+            background: #151515;
+            padding: 2rem;
+            border: 1px solid #252525;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            border-color: #00ff88;
+            transform: translateY(-5px);
+        }
+        
+        .contact-label {
+            color: #00ff88;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-value {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        
+        .contact-value a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-value a:hover {
+            color: #00ff88;
+        }
+        
+        footer {
+            background: #0a0a0a;
+            padding: 2rem;
+            text-align: center;
+            color: #555;
+            border-top: 1px solid #252525;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 3%;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content {
+                padding: 2rem 5%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 4rem 5%;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .projects-grid,
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card,
+            .skill-item,
+            .contact-item {
+                margin-bottom: 1.5rem;
+            }
+            
+            .testimonial-card {
+                padding: 2rem;
+            }
+            
+            .pricing-info {
+                padding: 2rem;
+            }
+            
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            div[style*="transform: scale(1.05)"] {
+                transform: scale(1) !important;
+            }
+            
+            body {
+                overflow-x: hidden;
+            }
+            
+            * {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    
+    <nav>
+        <div class="logo">LTK</div>
+        <ul class="nav-links">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>rorisummit</h1>
+            <p>Web Developer & Computer Science Student</p>
+            <p class="subtitle">Building websites for Auckland businesses that turn visitors into customers</p>
+            <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" class="cta">Book a Free 15-Min Project Call</a>
+        </div>
+    </section>
+    
+    <section class="section" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <span class="project-tag">Education</span>
+                <span class="project-tag">Institutional</span>
+                <h3>Zenith Academy</h3>
+                <p><strong>Before:</strong> Generic template with poor mobile experience<br>
+                <strong>After:</strong> Premium institutional site with 98% faster load times and professional credibility that positions them as a top-tier academy.</p>
+                <a href="https://codepen.io/Leeroy-Kanyuchi-the-reactor/full/pvbpOwq" target="_blank" rel="noopener" class="project-link">View Project →</a>
+            </div>
+            
+            <div class="project-card">
+                <span class="project-tag">Food & Beverage</span>
+                <span class="project-tag">Local Business</span>
+                <h3>Brew & Crumb Cafe</h3>
+                <p><strong>Before:</strong> No online presence, customers had to call for menu/hours<br>
+                <strong>After:</strong> Welcoming digital storefront with menu, contact info, and hours—now customers can find them 24/7 without picking up the phone.</p>
+                <a href="https://codepen.io/Leeroy-Kanyuchi-the-reactor/full/OPXzoVj" target="_blank" rel="noopener" class="project-link">View Project →</a>
+            </div>
+            
+            <div class="project-card">
+                <span class="project-tag">Portfolio</span>
+                <span class="project-tag">Personal Brand</span>
+                <h3>My Journey</h3>
+                <p>I started coding in early high school, fascinated by the power of technology to solve real problems. What began as curiosity evolved into a passion. Now, as a Computer Science student and software developer, I build websites that help businesses grow and connect with their customers.</p>
+                <a href="#contact" class="project-link">Let's Connect →</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section testimonials" id="testimonials">
+        <h2 class="section-title">Client Testimonials</h2>
+        <div class="testimonial-card">
+            <p class="testimonial-text">"Leeroy was instrumental in the development of my project. His technical expertise and attention to detail made a huge difference. He understood exactly what I needed and delivered beyond my expectations. Highly recommend working with him!"</p>
+            <div class="testimonial-author">Dale</div>
+            <div class="testimonial-role">Project Client</div>
+        </div>
+    </section>
+    
+    <section class="section skills" id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-item">HTML5 & CSS3</div>
+                <div class="skill-item">JavaScript (ES6+)</div>
+                <div class="skill-item">React & Vue.js</div>
+                <div class="skill-item">Responsive Design</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Design</h3>
+                <div class="skill-item">UI/UX Principles</div>
+                <div class="skill-item">Animation & Transitions</div>
+                <div class="skill-item">Color Theory</div>
+                <div class="skill-item">Typography</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Tools</h3>
+                <div class="skill-item">Git & GitHub</div>
+                <div class="skill-item">VS Code</div>
+                <div class="skill-item">Figma</div>
+                <div class="skill-item">Chrome DevTools</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Currently Learning</h3>
+                <div class="skill-item">Three.js</div>
+                <div class="skill-item">WebGL</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">TypeScript</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section pricing" id="pricing">
+        <h2 class="section-title">Website Development Pricing</h2>
+        <p style="text-align: center; color: #666; font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">Professional websites built to convert visitors into customers. Mobile-responsive, fast-loading, and tailored to your business.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+            <div style="background: white; border: 2px solid #e0e0e0; padding: 2.5rem; border-radius: 10px; transition: all 0.3s;">
+                <h3 style="color: #0a0a0a; font-size: 1.8rem; margin-bottom: 0.5rem;">Landing Page</h3>
+                <div style="color: #00ff88; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">$500<span style="font-size: 1.2rem; color: #666; font-weight: 400;"> - $800</span></div>
+                <p style="color: #666; margin-bottom: 2rem; font-size: 0.95rem;">Perfect for getting online fast</p>
+                
+                <ul style="list-style: none; margin-bottom: 2rem;">
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ 1-3 pages (Home, About, Contact)</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Mobile responsive design</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Contact form integration</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Google Maps integration</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Social media links</li>
+                    <li style="color: #555; padding: 0.7rem 0;">✓ 2 rounds of revisions</li>
+                </ul>
+                
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Best for: Freelancers, consultants, small service businesses needing a simple online presence.</p>
+                
+                <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: block; width: 100%; padding: 1rem; background: #00ff88; color: #0a0a0a; text-align: center; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book Project Call</a>
+            </div>
+            
+            <div style="background: white; border: 3px solid #00ff88; padding: 2.5rem; border-radius: 10px; position: relative; box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);">
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #00ff88; color: #0a0a0a; padding: 0.4rem 1.5rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">⭐ MOST POPULAR</div>
+                
+                <h3 style="color: #0a0a0a; font-size: 1.8rem; margin-bottom: 0.5rem;">Business Website</h3>
+                <div style="color: #00ff88; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">$1,500<span style="font-size: 1.2rem; color: #666; font-weight: 400;"> - $2,500</span></div>
+                <p style="color: #666; margin-bottom: 2rem; font-size: 0.95rem;">Full-featured professional site</p>
+                
+                <p style="color: #555; margin-bottom: 1rem; font-weight: 600;">Everything in Landing Page, plus:</p>
+                
+                <ul style="list-style: none; margin-bottom: 2rem;">
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ 5-8 pages (Services, Portfolio, Testimonials, etc.)</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Custom animations & interactions</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ SEO optimization (meta tags, speed)</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Photo gallery or portfolio showcase</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Blog setup (optional)</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Email newsletter integration</li>
+                    <li style="color: #555; padding: 0.7rem 0;">✓ 3 rounds of revisions</li>
+                </ul>
+                
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Best for: Established businesses, agencies, professional services needing a complete online presence.</p>
+                
+                <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: block; width: 100%; padding: 1rem; background: #00ff88; color: #0a0a0a; text-align: center; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book Project Call</a>
+            </div>
+            
+            <div style="background: white; border: 2px solid #e0e0e0; padding: 2.5rem; border-radius: 10px; transition: all 0.3s;">
+                <h3 style="color: #0a0a0a; font-size: 1.8rem; margin-bottom: 0.5rem;">Custom / E-commerce</h3>
+                <div style="color: #00ff88; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">$3,000<span style="font-size: 1.2rem; color: #666; font-weight: 400;">+</span></div>
+                <p style="color: #666; margin-bottom: 2rem; font-size: 0.95rem;">Advanced features & integrations</p>
+                
+                <p style="color: #555; margin-bottom: 1rem; font-weight: 600;">Everything in Business Website, plus:</p>
+                
+                <ul style="list-style: none; margin-bottom: 2rem;">
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ E-commerce functionality (product listings, cart, checkout)</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Online booking/scheduling system</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Member login/dashboard areas</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Payment gateway integration</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Custom databases & forms</li>
+                    <li style="color: #555; padding: 0.7rem 0; border-bottom: 1px solid #f0f0f0;">✓ Advanced analytics setup</li>
+                    <li style="color: #555; padding: 0.7rem 0;">✓ Unlimited revisions during build</li>
+                </ul>
+                
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Best for: Online stores, SaaS products, businesses with complex functionality needs.</p>
+                
+                <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: block; width: 100%; padding: 1rem; background: #00ff88; color: #0a0a0a; text-align: center; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book Project Call</a>
+            </div>
+        </div>
+        
+        <div style="background: #f8f8f8; border: 1px solid #e0e0e0; padding: 3rem; border-radius: 10px; margin-bottom: 3rem;">
+            <h3 style="color: #0a0a0a; font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">Typical Timeline</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+                <div>
+                    <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">1-2 weeks</div>
+                    <p style="color: #555;">Landing Page</p>
+                </div>
+                <div>
+                    <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">2-4 weeks</div>
+                    <p style="color: #555;">Business Website</p>
+                </div>
+                <div>
+                    <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">4-8 weeks</div>
+                    <p style="color: #555;">Custom / E-commerce</p>
+                </div>
+            </div>
+            <p style="text-align: center; color: #666; margin-top: 2rem; font-size: 0.95rem;">All projects include mobile optimization, basic SEO, and hosting setup assistance.</p>
+        </div>
+        
+        <div style="background: white; border: 2px solid #00ff88; padding: 2.5rem; border-radius: 10px;">
+            <h3 style="color: #0a0a0a; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Optional Add-Ons</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="border-left: 3px solid #00ff88; padding-left: 1rem;">
+                    <strong style="color: #0a0a0a;">Logo Design</strong>
+                    <p style="color: #666; font-size: 0.9rem;">From $200</p>
+                </div>
+                <div style="border-left: 3px solid #00ff88; padding-left: 1rem;">
+                    <strong style="color: #0a0a0a;">Content Writing</strong>
+                    <p style="color: #666; font-size: 0.9rem;">From $50/page</p>
+                </div>
+                <div style="border-left: 3px solid #00ff88; padding-left: 1rem;">
+                    <strong style="color: #0a0a0a;">Monthly Maintenance</strong>
+                    <p style="color: #666; font-size: 0.9rem;">From $100/month</p>
+                </div>
+                <div style="border-left: 3px solid #00ff88; padding-left: 1rem;">
+                    <strong style="color: #0a0a0a;">AI Chatbot Integration</strong>
+                    <p style="color: #666; font-size: 0.9rem;">From $300 setup</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" style="background: #0a0a0a; padding: 6rem 5%;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title" style="color: #00ff88;">AI Receptionist Pricing</h2>
+            <p style="text-align: center; color: #ccc; font-size: 1.3rem; max-width: 800px; margin: 0 auto 1rem;">Never miss another customer call or enquiry.</p>
+            <p style="text-align: center; color: #888; font-size: 1.1rem; max-width: 900px; margin: 0 auto 4rem; line-height: 1.8;">Our AI receptionist answers calls and website chats for your business, captures lead details, and sends them straight to you — so you don't lose customers when you're busy, offline, or closed.</p>
+            
+            <p style="text-align: center; color: #888; font-size: 1rem; margin-bottom: 3rem;">Simple monthly pricing. Cancel anytime.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <div style="background: #151515; border: 2px solid #252525; padding: 2.5rem; border-radius: 10px; transition: all 0.3s;">
+                    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem;">Starter</h3>
+                    <div style="color: #00ff88; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">$99<span style="font-size: 1.2rem; color: #888; font-weight: 400;"> / month</span></div>
+                    <p style="color: #888; margin-bottom: 2rem; font-size: 0.95rem;">Best for small local businesses</p>
+                    
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ AI receptionist answers website chats</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Captures name, phone number, and reason for enquiry</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Sends leads directly to your email</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Business-hours coverage</li>
+                        <li style="color: #ccc; padding: 0.7rem 0;">✓ Basic custom greeting for your business</li>
+                    </ul>
+                    
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Best if: you're missing enquiries while busy and want a simple, affordable solution.</p>
+                    
+                    <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: block; width: 100%; padding: 1rem; background: #00ff88; color: #0a0a0a; text-align: center; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book Setup Call</a>
+                </div>
+                
+                <div style="background: #151515; border: 3px solid #00ff88; padding: 2.5rem; border-radius: 10px; position: relative; transform: scale(1.05); box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #00ff88; color: #0a0a0a; padding: 0.4rem 1.5rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">⭐ MOST POPULAR</div>
+                    
+                    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem;">Growth</h3>
+                    <div style="color: #00ff88; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">$199<span style="font-size: 1.2rem; color: #888; font-weight: 400;"> / month</span></div>
+                    <p style="color: #888; margin-bottom: 2rem; font-size: 0.95rem;">Best for growing businesses</p>
+                    
+                    <p style="color: #ccc; margin-bottom: 1rem; font-weight: 600;">Everything in Starter, plus:</p>
+                    
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ 24/7 AI receptionist</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Appointment booking support</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ SMS + email notifications</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Fully customised conversation script</li>
+                        <li style="color: #ccc; padding: 0.7rem 0;">✓ Handles FAQs (hours, location, services, pricing basics)</li>
+                    </ul>
+                    
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Best if: missed calls = missed money and you want full coverage.</p>
+                    
+                    <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: block; width: 100%; padding: 1rem; background: #00ff88; color: #0a0a0a; text-align: center; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book Setup Call</a>
+                </div>
+                
+                <div style="background: #151515; border: 2px solid #252525; padding: 2.5rem; border-radius: 10px; transition: all 0.3s;">
+                    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem;">Pro</h3>
+                    <div style="color: #00ff88; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">$299<span style="font-size: 1.2rem; color: #888; font-weight: 400;"> / month</span></div>
+                    <p style="color: #888; margin-bottom: 2rem; font-size: 0.95rem;">For high-volume businesses</p>
+                    
+                    <p style="color: #ccc; margin-bottom: 1rem; font-weight: 600;">Everything in Growth, plus:</p>
+                    
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ CRM integration</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Call & chat summaries</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Lead tagging and prioritisation</li>
+                        <li style="color: #ccc; padding: 0.7rem 0; border-bottom: 1px solid #252525;">✓ Monthly optimisation & improvements</li>
+                        <li style="color: #ccc; padding: 0.7rem 0;">✓ Priority support</li>
+                    </ul>
+                    
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Best if: your business receives high enquiry volume and needs automation at scale.</p>
+                    
+                    <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: block; width: 100%; padding: 1rem; background: #00ff88; color: #0a0a0a; text-align: center; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book Setup Call</a>
+                </div>
+            </div>
+            
+            <div style="background: #151515; border: 1px solid #252525; padding: 3rem; border-radius: 10px; margin-bottom: 3rem;">
+                <h3 style="color: #00ff88; font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">How setup works</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+                    <div>
+                        <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">1</div>
+                        <p style="color: #ccc;">Book a free 15-minute setup call</p>
+                    </div>
+                    <div>
+                        <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">2</div>
+                        <p style="color: #ccc;">We learn about your business and goals</p>
+                    </div>
+                    <div>
+                        <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">3</div>
+                        <p style="color: #ccc;">Your AI receptionist is configured and tested</p>
+                    </div>
+                    <div>
+                        <div style="color: #00ff88; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">4</div>
+                        <p style="color: #ccc;">Go live in days, not weeks</p>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #888; margin-top: 2rem; font-size: 0.95rem;">No long-term contracts. No hidden fees.</p>
+            </div>
+            
+            <div style="background: rgba(0, 255, 136, 0.05); border: 2px solid #00ff88; padding: 2rem; border-radius: 10px; text-align: center; margin-bottom: 2rem;">
+                <h4 style="color: #00ff88; font-size: 1.3rem; margin-bottom: 1rem;">Limited availability</h4>
+                <p style="color: #ccc; margin-bottom: 1.5rem;">To maintain quality, we only onboard a limited number of businesses at a time.</p>
+                <a href="https://calendly.com/leeroykanyuchi/discovery-call" target="_blank" rel="noopener" style="display: inline-block; padding: 1rem 2.5rem; background: #00ff88; color: #0a0a0a; text-decoration: none; font-weight: 600; border-radius: 5px; transition: all 0.3s;">Book a Free 15-Min Project Call</a>
+            </div>
+            
+            <p style="text-align: center; color: #888; font-size: 1rem; font-style: italic;">If we don't believe the AI receptionist is a good fit for your business, we'll tell you upfront.</p>
+        </div>
+    </section>
+    
+    <section class="section" style="background: linear-gradient(135deg, #0f1f0f 0%, #0a0a0a 100%); text-align: center;">
+        <h2 class="section-title" style="color: #00ff88;">Get Exclusive Deals</h2>
+        <p style="color: #888; font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Get notified about limited discounts and early-bird spots for the AI receptionist. First 10 customers get exclusive pricing.
+        </p>
+        
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="ml-embedded" data-form="I7qpdx"></div>
+        </div>
+        
+        <div style="margin-top: 3rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; max-width: 800px; margin-left: auto; margin-right: auto; margin-top: 3rem;">
+            <div style="flex: 1; min-width: 200px;">
+                <div style="font-size: 2rem; color: #00ff88; margin-bottom: 0.5rem;">🤖</div>
+                <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem;">AI Receptionist</div>
+                <div style="color: #888; font-size: 0.9rem;">24/7 customer support automation</div>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <div style="font-size: 2rem; color: #00ff88; margin-bottom: 0.5rem;">⚡</div>
+                <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem;">Launch Special</div>
+                <div style="color: #888; font-size: 0.9rem;">Up to 40% off for early adopters</div>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <div style="font-size: 2rem; color: #00ff88; margin-bottom: 0.5rem;">🔔</div>
+                <div style="color: #fff; font-weight: 600; margin-bottom: 0.3rem;">Exclusive Access</div>
+                <div style="color: #888; font-size: 0.9rem;">Be first in line when we launch</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section contact" id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p>Ready to bring your project to life? Get in touch!</p>
+        
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-label">Email</div>
+                <div class="contact-value"><a href="mailto:leeroykanyuchi@gmail.com">leeroykanyuchi@gmail.com</a></div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-label">Phone</div>
+                <div class="contact-value"><a href="tel:0225261566">022 526 1566</a></div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-label">Instagram</div>
+                <div class="contact-value"><a href="https://instagram.com/lt.kanyuchi" target="_blank" rel="noopener">@lt.kanyuchi</a></div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-label">Location</div>
+                <div class="contact-value">Auckland, New Zealand</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 Leeroy Tendai Kanyuchi. Built with passion and code.</p>
+    </footer>
+    
+    <script>
+        const cursor = document.querySelector('.cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        document.querySelectorAll('a, .project-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.background = 'rgba(0, 255, 136, 0.2)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.background = 'transparent';
+            });
+        });
+    </script>
+</body>
+</html>
